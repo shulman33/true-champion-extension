@@ -1,0 +1,23 @@
+{
+  "name": "true-champion-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension that connects a private ESPN fantasy league to True Champion with one click.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:dev": "node build.mjs --dev",
+    "pack": "npm run build && cd dist && zip -qr ../true-champion-extension-$npm_package_version.zip . && cd .. && echo true-champion-extension-$npm_package_version.zip",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "icons": "node scripts/make-icons.mjs",
+    "id": "node scripts/extension-id.mjs"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.12",
+    "esbuild": "^0.25.0",
+    "typescript": "^5",
+    "vitest": "^3.2.7"
+  }
+}
