@@ -1,6 +1,6 @@
 # Chrome Web Store listing
 
-Copy for the developer dashboard (chrome.google.com/webstore/devconsole). Upload `true-champion-extension-<version>.zip` from `npm run pack`.
+Copy for the developer dashboard (chrome.google.com/webstore/devconsole). Upload `true-champion-extension-<version>.zip` from `npm run pack`. The store assigns the listing its own id (a `key` in the manifest is rejected); once it exists, set `NEXT_PUBLIC_EXTENSION_ID` to that id in the app's Vercel production environment and redeploy.
 
 ## Name
 
@@ -45,7 +45,7 @@ English
 - Host `https://true-champion-app.vercel.app/*`: the only place the cookies are sent.
 - Remote code: none.
 - Data usage: authentication information (ESPN session cookies), transferred to True Champion at the user's request, used only to provide the feature. Not sold, not used for unrelated purposes, not used for creditworthiness or lending.
-- Privacy policy URL: the True Champion privacy policy (phase 8 of the app plan; use https://true-champion-app.vercel.app/privacy once published).
+- Privacy policy URL: https://true-champion-app.vercel.app/privacy
 
 ## Assets still to capture
 

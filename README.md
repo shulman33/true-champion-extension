@@ -42,7 +42,9 @@ npm run build:dev   # dist-dev/ — also talks to http://localhost:3001 for loca
 npm run pack        # zip of dist/ for the store
 ```
 
-Load `dist/` (or `dist-dev/`) unpacked from `chrome://extensions` with Developer mode on. The manifest carries the public `key`, so every build has the id `eijljeemgciohaebdaahbpkmjfhgmnhc`, the same as the store listing (`npm run id` prints it). The matching private `key.pem` is not in the repo and is only needed for packing a `.crx` by hand.
+Load `dist/` (or `dist-dev/`) unpacked from `chrome://extensions` with Developer mode on. The dev build carries the public key from `dev-key.json`, so `dist-dev/` always has the id `eijljeemgciohaebdaahbpkmjfhgmnhc` (`npm run id` prints it); the Chrome Web Store does not accept a `key` field, so the listing has its own id, which the app reads from `NEXT_PUBLIC_EXTENSION_ID`. The matching private `key.pem` is not in the repo and is only needed for packing a `.crx` by hand.
+
+Privacy policy: https://true-champion-app.vercel.app/privacy
 
 The app's browser tests load `dist-dev/` into a persistent Chromium context; see `e2e/espn-extension.spec.ts` in [true-champion-app](https://github.com/shulman33/true-champion-app).
 

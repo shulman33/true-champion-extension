@@ -1,0 +1,4 @@
+{
+  "comment": "Public key injected into dist-dev/manifest.json only, so local and Playwright builds keep the id eijljeemgciohaebdaahbpkmjfhgmnhc. The Chrome Web Store rejects a `key` field and assigns the listing its own id.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr3OSriuihIuEp8GY49lG/jZBz2ZwXl7HCgHGZEVZoZ4/ErEqEerHSwNP3BJ6cObpKtQbBmY0dkUIvMI6XUXIRSvAT/PEBvPJxabFN8uTO8bmZjYZ/Ot8NTr5XfETaUr5tI61o23NK7wR+436JdrQE19rvkNpzm3pvgoaTJzeTgbZe8SM479nq+pnJjl9Xt4PvtUvRTXveFHlHw22ee9H2JmRPKzUDLF1zsEYeYhK7eUC8d9NQyNy4YOkSFDZtRddfdv5YUanRpoiuzUGHXJBL8hSLdRxQflz61Vrw7lIEEJ6H4m6R4Cx997UFTUKYdSsKlUeCz4pjhyyHjyt/nSifQIDAQAB"
+}
