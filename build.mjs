@@ -26,7 +26,7 @@ await build({
   sourcemap: false,
   legalComments: "none",
   // Where the popup's button and privacy link go.
-  define: { __APP_ORIGIN__: JSON.stringify(dev ? "http://localhost:3001" : "https://true-champion-app.vercel.app") },
+  define: { __APP_ORIGIN__: JSON.stringify(dev ? "http://localhost:3001" : "https://www.truechampion.app") },
 });
 cpSync("src/popup.html", `${out}/popup.html`);
 

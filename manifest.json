@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "True Champion for ESPN",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Connect your private ESPN fantasy league to True Champion in one click. Securely syncs cookies straight to your account.",
   "homepage_url": "https://github.com/shulman33/true-champion-extension",
   "permissions": [
@@ -11,11 +11,11 @@
   ],
   "host_permissions": [
     "*://*.espn.com/*",
-    "https://true-champion-app.vercel.app/*"
+    "https://www.truechampion.app/*"
   ],
   "externally_connectable": {
     "matches": [
-      "https://true-champion-app.vercel.app/*"
+      "https://www.truechampion.app/*"
     ]
   },
   "background": {

@@ -18,7 +18,7 @@ Private ESPN leagues only show their data to signed-in members, and ESPN keeps t
 
 What it does:
 • Reads exactly two cookies from espn.com. Nothing else.
-• Only acts when you click Connect ESPN on true-champion-app.vercel.app, and only answers that site.
+• Only acts when you click Connect ESPN on www.truechampion.app, and only answers that site.
 • Sends the cookies to that site only, over HTTPS. It refuses any other destination.
 • If you are signed out of ESPN, opens ESPN's login page and waits up to ten minutes for you to sign in, then finishes.
 • Click the toolbar icon any time to see whether you are signed in to ESPN and how the last connect ended. The icon shows a ✓ or ! badge when a connect finishes.
@@ -43,10 +43,10 @@ English
 - `storage`: remember (session storage) that a connect is waiting for the ESPN login while the background worker is asleep, and (local storage) how the last connect ended so the toolbar popup can show it. No cookie values are stored.
 - `alarms`: the ten-minute wait-for-login timeout.
 - Host `*://*.espn.com/*`: required by the cookies permission for espn.com.
-- Host `https://true-champion-app.vercel.app/*`: the only place the cookies are sent.
+- Host `https://www.truechampion.app/*`: the only place the cookies are sent.
 - Remote code: none.
 - Data usage: authentication information (ESPN session cookies), transferred to True Champion at the user's request, used only to provide the feature. Not sold, not used for unrelated purposes, not used for creditworthiness or lending.
-- Privacy policy URL: https://true-champion-app.vercel.app/privacy
+- Privacy policy URL: https://www.truechampion.app/privacy
 
 ## Assets still to capture
 
