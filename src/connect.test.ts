@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cancel, checkEndpoint, ENDPOINT_PATH, ESPN_LOGIN_URL, onEspnCookieSet, onTimeout, startConnect, type Browser, type Pending } from "./connect";
 import type { Status } from "./protocol";
 
-const ORIGIN = "https://true-champion-app.vercel.app";
+const ORIGIN = "https://www.truechampion.app";
 const ENDPOINT = `${ORIGIN}${ENDPOINT_PATH}`;
 const TOKEN = "a".repeat(43);
 

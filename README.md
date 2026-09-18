@@ -1,13 +1,13 @@
 # True Champion for ESPN
 
-A tiny Chrome extension (also Edge, Brave, Arc, Opera) that connects a **private ESPN fantasy football league** to [True Champion](https://true-champion-app.vercel.app) with one click. True Champion shows what your record would be without the schedule and emails the league every Tuesday.
+A tiny Chrome extension (also Edge, Brave, Arc, Opera) that connects a **private ESPN fantasy football league** to [True Champion](https://www.truechampion.app) with one click. True Champion shows what your record would be without the schedule and emails the league every Tuesday.
 
 Private ESPN leagues only show their data to signed-in members. ESPN keeps that sign-in in two cookies that no website can read, so the only honest shortcut is an extension running in your own browser. This is that extension, and this README is exactly what it does.
 
 ## What it reads, and where it goes
 
 - **Two cookies from espn.com: `espn_s2` and `SWID`.** Nothing else. No browsing history, no page content, no other sites.
-- **Only when you click "Connect ESPN" on True Champion.** The toolbar popup only reports: whether this browser is signed in to ESPN, how the last connect ended, and a button that opens True Champion. There is no background activity and no interest in what you do otherwise. It only answers pages on `https://true-champion-app.vercel.app`.
+- **Only when you click "Connect ESPN" on True Champion.** The toolbar popup only reports: whether this browser is signed in to ESPN, how the last connect ended, and a button that opens True Champion. There is no background activity and no interest in what you do otherwise. It only answers pages on `https://www.truechampion.app`.
 - **Sent once, over HTTPS, to True Champion's connect endpoint** (`/api/connections/espn`) together with a single-use pairing token the page handed it. It refuses any other destination, even if the page asked. The extension never stores the cookies, never logs them, and never shows them.
 - **If you are signed out of ESPN** it opens ESPN's login page in a new tab and waits (up to ten minutes) for you to sign in, then finishes and closes that tab.
 - **No analytics, no remote code, no third parties.**
@@ -19,7 +19,7 @@ What True Champion does with the cookies is described on its connect page: verif
 | Permission | Why |
 | --- | --- |
 | `cookies` + host `*://*.espn.com/*` | Read `espn_s2` and `SWID`, and notice when they appear after you sign in. |
-| host `https://true-champion-app.vercel.app/*` | POST the cookies to the connect endpoint. |
+| host `https://www.truechampion.app/*` | POST the cookies to the connect endpoint. |
 | `storage` | Session: remember that a connect is waiting for your ESPN login while the background worker sleeps (cleared when the browser closes). Local: how the last connect ended (connected, rejected or timed out, the league name or reason, and when) so the popup can tell you. Never a cookie value or the pairing token. |
 | `alarms` | The ten-minute wait-for-login timeout. |
 
@@ -44,7 +44,7 @@ npm run pack        # zip of dist/ for the store
 
 Load `dist/` (or `dist-dev/`) unpacked from `chrome://extensions` with Developer mode on. The dev build carries the public key from `dev-key.json`, so `dist-dev/` always has the id `eijljeemgciohaebdaahbpkmjfhgmnhc` (`npm run id` prints it); the Chrome Web Store does not accept a `key` field, so the listing has its own id, which the app reads from `NEXT_PUBLIC_EXTENSION_ID`. The matching private `key.pem` is not in the repo and is only needed for packing a `.crx` by hand.
 
-Privacy policy: https://true-champion-app.vercel.app/privacy
+Privacy policy: https://www.truechampion.app/privacy
 
 The app's browser tests load `dist-dev/` into a persistent Chromium context; see `e2e/espn-extension.spec.ts` in [true-champion-app](https://github.com/shulman33/true-champion-app).
 
