@@ -21,6 +21,7 @@ What it does:
 • Only acts when you click Connect ESPN on true-champion-app.vercel.app, and only answers that site.
 • Sends the cookies to that site only, over HTTPS. It refuses any other destination.
 • If you are signed out of ESPN, opens ESPN's login page and waits up to ten minutes for you to sign in, then finishes.
+• Click the toolbar icon any time to see whether you are signed in to ESPN and how the last connect ended. The icon shows a ✓ or ! badge when a connect finishes.
 • Never stores or logs the cookies. No analytics. No remote code. Open source (MIT): github.com/shulman33/true-champion-extension
 
 What True Champion does with them: verifies them against your league before saving anything, encrypts them at rest, logs every use where you can see it, and wipes them when you disconnect.
@@ -39,7 +40,7 @@ English
 
 - Single purpose: connect a private ESPN fantasy league to True Champion by transferring the user's ESPN session cookies to True Champion on the user's request.
 - `cookies`: read the two ESPN session cookies the user chose to hand over, and notice when they appear after sign-in.
-- `storage`: remember (in session storage only) that a connect is waiting for the ESPN login while the background worker is asleep. No cookie values are stored.
+- `storage`: remember (session storage) that a connect is waiting for the ESPN login while the background worker is asleep, and (local storage) how the last connect ended so the toolbar popup can show it. No cookie values are stored.
 - `alarms`: the ten-minute wait-for-login timeout.
 - Host `*://*.espn.com/*`: required by the cookies permission for espn.com.
 - Host `https://true-champion-app.vercel.app/*`: the only place the cookies are sent.

@@ -1,5 +1,6 @@
 import { cancel, ESPN_COOKIE_URL, onEspnCookieSet, onTimeout, startConnect, type Browser, type Pending } from "./connect";
 import { PROTOCOL, type PageMessage, type Ping, type Pong, type Status } from "./protocol";
+import { badgeFor, LAST_KEY, toLastResult } from "./summary";
 
 /**
  * MV3 service worker. Everything here is plumbing between Chrome and
@@ -40,6 +41,7 @@ const browser: Browser = {
   },
   fetch: (url, init) => fetch(url, init),
   notify(status: Status) {
+    void remember(status);
     for (const port of ports) {
       try {
         port.postMessage(status);
@@ -49,6 +51,15 @@ const browser: Browser = {
     }
   },
 };
+
+/** Keep the toolbar honest: badge the icon and save how the connect ended for the popup. */
+async function remember(status: Status) {
+  const badge = badgeFor(status);
+  await chrome.action.setBadgeBackgroundColor({ color: badge.color });
+  await chrome.action.setBadgeText({ text: badge.text });
+  const last = toLastResult(status, Date.now());
+  if (last) await chrome.storage.local.set({ [LAST_KEY]: last });
+}
 
 // Handshake: the page asks whether we are here and which version.
 chrome.runtime.onMessageExternal.addListener((message: Ping | unknown, _sender, sendResponse) => {

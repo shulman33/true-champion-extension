@@ -7,7 +7,7 @@ Private ESPN leagues only show their data to signed-in members. ESPN keeps that 
 ## What it reads, and where it goes
 
 - **Two cookies from espn.com: `espn_s2` and `SWID`.** Nothing else. No browsing history, no page content, no other sites.
-- **Only when you click "Connect ESPN" on True Champion.** The extension has no popup, no background activity, and no interest in what you do otherwise. It only answers pages on `https://true-champion-app.vercel.app`.
+- **Only when you click "Connect ESPN" on True Champion.** The toolbar popup only reports: whether this browser is signed in to ESPN, how the last connect ended, and a button that opens True Champion. There is no background activity and no interest in what you do otherwise. It only answers pages on `https://true-champion-app.vercel.app`.
 - **Sent once, over HTTPS, to True Champion's connect endpoint** (`/api/connections/espn`) together with a single-use pairing token the page handed it. It refuses any other destination, even if the page asked. The extension never stores the cookies, never logs them, and never shows them.
 - **If you are signed out of ESPN** it opens ESPN's login page in a new tab and waits (up to ten minutes) for you to sign in, then finishes and closes that tab.
 - **No analytics, no remote code, no third parties.**
@@ -20,7 +20,7 @@ What True Champion does with the cookies is described on its connect page: verif
 | --- | --- |
 | `cookies` + host `*://*.espn.com/*` | Read `espn_s2` and `SWID`, and notice when they appear after you sign in. |
 | host `https://true-champion-app.vercel.app/*` | POST the cookies to the connect endpoint. |
-| `storage` (session only) | Remember that a connect is waiting for your ESPN login while the background worker sleeps. Cleared when the browser closes. Never holds a cookie value. |
+| `storage` | Session: remember that a connect is waiting for your ESPN login while the background worker sleeps (cleared when the browser closes). Local: how the last connect ended (connected, rejected or timed out, the league name or reason, and when) so the popup can tell you. Never a cookie value or the pairing token. |
 | `alarms` | The ten-minute wait-for-login timeout. |
 
 ## How the handshake works
@@ -30,7 +30,7 @@ What True Champion does with the cookies is described on its connect page: verif
 3. The extension checks the endpoint is `/api/connections/espn` on the page's own origin, reads the two cookies, and POSTs `{ token, espn_s2, swid, extension_version }`. Missing cookies: it opens ESPN's login page and waits for them.
 4. Status flows back over the port (`awaiting_login`, `verifying`, `connected`, `rejected`, `timeout`); the page also polls its own server, so a sleeping worker never leaves it hanging.
 
-All of it is in [`src/connect.ts`](src/connect.ts) (the flow, unit tested without Chrome) and [`src/background.ts`](src/background.ts) (the Chrome plumbing).
+All of it is in [`src/connect.ts`](src/connect.ts) (the flow, unit tested without Chrome), [`src/background.ts`](src/background.ts) (the Chrome plumbing) and [`src/popup.ts`](src/popup.ts) with [`src/summary.ts`](src/summary.ts) (the read-only popup and the toolbar badge).
 
 ## Build it yourself
 

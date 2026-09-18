@@ -17,15 +17,18 @@ rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
 await build({
-  entryPoints: ["src/background.ts"],
+  entryPoints: ["src/background.ts", "src/popup.ts"],
   bundle: true,
   format: "esm",
   target: "chrome120",
-  outfile: `${out}/background.js`,
+  outdir: out,
   minify: false,
   sourcemap: false,
   legalComments: "none",
+  // Where the popup's button and privacy link go.
+  define: { __APP_ORIGIN__: JSON.stringify(dev ? "http://localhost:3001" : "https://true-champion-app.vercel.app") },
 });
+cpSync("src/popup.html", `${out}/popup.html`);
 
 const manifest = JSON.parse(readFileSync("manifest.json", "utf8"));
 delete manifest.key;
